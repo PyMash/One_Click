@@ -1,0 +1,247 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:one_click/Pages/landing_page.dart';
+import 'package:one_click/Pages/profile_page.dart';
+
+
+class BookingPage extends StatefulWidget {
+  const BookingPage({super.key});
+
+  @override
+  State<BookingPage> createState() => _BookingPageState();
+}
+
+class _BookingPageState extends State<BookingPage> {
+  final user = FirebaseAuth.instance.currentUser!;
+  late int totalService = 0;
+  late var serviceNameList = [];
+  late var placePincodeList = [];
+  late var serviceAvailable = [
+    'Tutor',
+    'Electrician',
+    'Plumber',
+    'Mechanic',
+    'Assistance',
+    'Driver'
+  ];
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future<void> deleteAllTaskDocs(String service) {
+    return users
+        .doc(user.uid)
+        .collection(service)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        doc.reference.delete();
+      });
+    });
+  }
+
+  List<String> docIDs = [];
+
+  Future fetchdata(srlist) async {
+    var snapdata;
+    totalService = 0;
+    for (var i = 0; i < srlist.length; i++) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .collection(srlist[i].toString())
+          .doc('All Details')
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        // final testdata = documentSnapshot.data();
+
+        // final Map<String, dynamic> convertedData =
+        //     jsonDecode(jsonEncode(testdata));
+        if (documentSnapshot.exists) {
+          snapdata = documentSnapshot.data()!;
+          Map<String, dynamic>? data = snapdata;
+
+          // print(data!['Time']);
+          String placePincode = (data!['Place and Pincode']).toString();
+          // print('Document data: ${documentSnapshot.data()}');
+          serviceNameList.add(srlist[i].toString());
+          placePincodeList.add(placePincode);
+          totalService = totalService + 1;
+        } else {
+          print('Document does not exist on the database');
+        }
+      });
+    }
+  }
+
+  Future getdata() async {
+    print(totalService);
+    print(serviceNameList.toSet());
+    print(placePincodeList);
+  }
+
+  Future getDocId() async {
+    // await FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(user.uid)
+    //     .collection('Tutor')
+    //     .doc('All Details')
+    //     .get()
+    //     .then((DocumentSnapshot documentSnapshot) {
+    //   final testdata = documentSnapshot.data();
+
+    //   final Map<String, dynamic> convertedData =
+    //       jsonDecode(jsonEncode(testdata));
+    //   print(convertedData.runtimeType);
+    //   if (documentSnapshot.exists) {
+    //     print('Document data: ${documentSnapshot.data()}');
+    //     serviceNameList.add('Tutor');
+
+    //     return documentSnapshot.data().toString();
+    //   } else {
+    //     print('Document does not exist on the database');
+    //     return null;
+    //   }
+    // });
+    // totalService = totalService + 1;
+    await fetchdata(serviceAvailable);
+    await getdata();
+  }
+
+  // @override
+  // void initState() {
+  //   getDocId();
+  //   super.initState();
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LandingPage()));
+        return true;
+      },
+      child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 194, 188, 240),
+          appBar: AppBar(
+            title: const Text(
+              'Bookings',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.deepPurple,
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            // centerTitle: true,
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FutureBuilder(
+                  future: getDocId(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                          itemCount: totalService,
+                          itemBuilder: ((context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.white,
+                                ),
+                                child: ListTile(
+                                  title: Text(serviceNameList[index].toString(),style: const TextStyle(color: Colors.deepPurple,
+                                  letterSpacing: 1.3,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  ),),
+                                  subtitle: Text(placePincodeList[index],style: const TextStyle(color: Colors.black,
+                                  letterSpacing: 1.1,
+                                  fontWeight: FontWeight.w500,
+                                  )),
+                                  trailing: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          serviceNameList.remove(index);
+                                          deleteAllTaskDocs(serviceNameList[index]);
+                                        });
+                                      },
+                                      icon: const Icon(Icons.delete,color: Colors.deepPurple,),splashColor: Colors.deepPurple,),
+                                ),
+                              ),
+                            );
+                          }));
+                    }
+                    return const Text('Loading');
+                  }),
+            ),
+
+
+          ),
+          bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.deepPurple.withOpacity(.1),
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                selectedIndex: 1,
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.deepPurple[100]!,
+                gap: 8,
+                activeColor: Colors.black,
+                iconSize: 24,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: Colors.grey[100]!,
+                color: Colors.deepPurple,
+                tabs: const [
+                  GButton(
+                    icon: LineIcons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: LineIcons.elementor,
+                    text: 'Booking',
+                  ),
+                  GButton(
+                    icon: LineIcons.user,
+                    text: 'Profile',
+                  ),
+                ],
+                onTabChange: (index) {
+                  setState(() {
+                    if (index == 0) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LandingPage()));
+                    } else if (index == 2) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfilePage()));
+                    }
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+          
+          ),
+    );
+  }
+}
