@@ -39,9 +39,9 @@ class _ProfilePageState extends State<ProfilePage> {
       if (documentSnapshot.exists) {
         snapdata = documentSnapshot.data()!;
         Map<String, dynamic>? data = snapdata;
-        String placePincode = (data!['Name']).toString();
-        name = placePincode.toTitleCase();
-        print(placePincode);
+        String namedata = (data!['Name']).toString();
+        name = namedata.toTitleCase();
+        print(namedata);
         return documentSnapshot.data().toString();
       } else {
         print('Document does not exist on the database');
