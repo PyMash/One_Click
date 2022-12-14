@@ -34,21 +34,21 @@ class DateTimePage extends StatefulWidget {
 }
 
 class _DateTimePageState extends State<DateTimePage> {
+  DateTime now = DateTime.now();
   final user = FirebaseAuth.instance.currentUser!;
   final _date = TextEditingController();
   final _time = TextEditingController();
   late String dateDetails = '';
   late String timeDetails = '';
   String ser = '';
+  late int dateIndex = -1;
   List<Service> services = [
     Service('10.00AM'),
     Service('11.00AM'),
     Service('12.00AM'),
     Service('01:00PM'),
     Service('02.00PM'),
-    Service(
-      '03.00PM',
-    )
+    Service('03.00PM'),
   ];
 
   int selectedService = -1;
@@ -214,12 +214,12 @@ class _DateTimePageState extends State<DateTimePage> {
 
                         timeDetails = outcome(selectedService).toString();
                         ser = widget.services;
-                        String dateTime = timeDetails + ' ' + dateDetails;
-                        print(dateTime);
-                        String pp = widget.primaryAddress +' - ' + widget.pincode.toString();
+                        String dateTime = '$timeDetails $dateDetails';
+                        String pp = '${widget.primaryAddress} - ${widget.pincode}';
 
                         try {
-                          await FirebaseFirestore.instance
+                          if (selectedService >= 0 && dateDetails.isNotEmpty) {
+                            await FirebaseFirestore.instance
                               .collection('users')
                               .doc(user.uid)
                               .collection(ser)
@@ -233,9 +233,30 @@ class _DateTimePageState extends State<DateTimePage> {
                             'Pin Code': widget.pincode,
                             'Address Type': widget.addresstype,
                             'Time & Date': dateTime.trim(),
-                            'Place and Pincode' :pp,
-
+                            'Place and Pincode': pp,
+                            
                           });
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ConfirmPage()));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Select Date & Time ',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                          }
+                          
+                          
+
+                          ///Non implementing database;
+
                           // await FirebaseFirestore.instance
                           //     .collection('users')
                           //     .doc(user.uid)
@@ -259,10 +280,8 @@ class _DateTimePageState extends State<DateTimePage> {
                           // });
 
                           // ignore: use_build_context_synchronously
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ConfirmPage()));
+
+                          
                         } on FirebaseAuthException catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor:
@@ -287,13 +306,46 @@ class _DateTimePageState extends State<DateTimePage> {
   }
 
   serviceContainer(String name, int index) {
+    dateIndex = index;
     return GestureDetector(
       onTap: () {
+        int currentTime = int.parse(now.hour.toString());
+        print('currentTime' + '$currentTime');
+        print(dateIndex);
+        // String smallString = timeDetails.substring(0, 2);
+        // var timeInt = int.parse(smallString);
+        // if (timeInt < 10) {
+        //   timeInt = timeInt + 12;
+        // }
+        // print(smallString);
+        // print(timeInt);
+        String todaydate =
+            "${today.year.toString()}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}";
+
         setState(() {
           if (selectedService == index)
             selectedService = -1;
-          else
-            selectedService = index;
+          else {
+            if (dateDetails == todaydate) {
+              if (currentTime > 10 && index == 0) {
+                selectedService = -1;
+              } else if (currentTime > 11 && index == 1) {
+                selectedService = -1;
+              } else if (currentTime > 12 && index == 2) {
+                selectedService = -1;
+              } else if (currentTime > 13 && index == 3) {
+                selectedService = -1;
+              } else if (currentTime > 14 && index == 4) {
+                selectedService = -1;
+              } else if (currentTime > 14 && index == 5) {
+                selectedService = -1;
+              } else {
+                selectedService = index;
+              }
+            } else {
+              selectedService = index;
+            }
+          }
         });
       },
       child: AnimatedContainer(
