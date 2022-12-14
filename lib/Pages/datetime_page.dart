@@ -247,7 +247,7 @@ class _DateTimePageState extends State<DateTimePage> {
                                               backgroundColor: Color.fromARGB(
                                                   255, 82, 25, 180),
                                               content: Text(
-                                                'Select Date & Time ',
+                                                'Select Date as well as Time to Continue',
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               )));
