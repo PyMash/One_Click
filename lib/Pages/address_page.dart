@@ -35,7 +35,7 @@ class _Address_pageState extends State<AddressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 194, 188, 240),
         body: SafeArea(
             child: Center(
                 child: SingleChildScrollView(

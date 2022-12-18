@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 194, 188, 240),
       floatingActionButton: selectedService >= 0
           ? FloatingActionButton(
               onPressed: () async{

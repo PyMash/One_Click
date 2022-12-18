@@ -130,6 +130,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 194, 188, 240),
       body: Column(
         children: [
           Container(

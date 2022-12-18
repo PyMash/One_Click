@@ -24,6 +24,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -35,7 +36,7 @@ class _LandingPageState extends State<LandingPage> {
         ),
         backgroundColor: const Color.fromARGB(255, 82, 25, 180),
       ),
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: const Color.fromARGB(255, 194, 188, 240),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -262,14 +263,28 @@ class _LandingPageState extends State<LandingPage> {
                   _selectedIndex = index;
                   if (index == 2) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
+          context,
+          PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation1,
+                Animation<double> animation2) {
+              return const ProfilePage();
+            },
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
                   } else if (index == 1) {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BookingPage()));
+          context,
+          PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation1,
+                Animation<double> animation2) {
+              return const BookingPage();
+            },
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
                   } 
                 });
               },

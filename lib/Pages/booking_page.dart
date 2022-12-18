@@ -6,7 +6,6 @@ import 'package:line_icons/line_icons.dart';
 import 'package:one_click/Pages/landing_page.dart';
 import 'package:one_click/Pages/profile_page.dart';
 
-
 class BookingPage extends StatefulWidget {
   const BookingPage({super.key});
 
@@ -123,65 +122,73 @@ class _BookingPageState extends State<BookingPage> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 194, 188, 240),
-          appBar: AppBar(
-            title: const Text(
-              'Bookings',
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.deepPurple,
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            // centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 194, 188, 240),
+        appBar: AppBar(
+          title: const Text(
+            'Bookings',
+            style: TextStyle(color: Colors.white),
           ),
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FutureBuilder(
-                  future: getDocId(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return ListView.builder(
-                          itemCount: totalService,
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.white,
+          backgroundColor: Colors.deepPurple,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          // centerTitle: true,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder(
+                future: getDocId(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ListView.builder(
+                        itemCount: totalService,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white,
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  serviceNameList[index].toString(),
+                                  style: const TextStyle(
+                                    color: Colors.deepPurple,
+                                    letterSpacing: 1.3,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                                child: ListTile(
-                                  title: Text(serviceNameList[index].toString(),style: const TextStyle(color: Colors.deepPurple,
-                                  letterSpacing: 1.3,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  ),),
-                                  subtitle: Text(placePincodeList[index],style: const TextStyle(color: Colors.black,
-                                  letterSpacing: 1.1,
-                                  fontWeight: FontWeight.w500,
-                                  )),
-                                  trailing: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          serviceNameList.remove(index);
-                                          deleteAllTaskDocs(serviceNameList[index]);
-                                        });
-                                      },
-                                      icon: const Icon(Icons.delete,color: Colors.deepPurple,),splashColor: Colors.deepPurple,),
+                                subtitle: Text(placePincodeList[index],
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      letterSpacing: 1.1,
+                                      fontWeight: FontWeight.w500,
+                                    )),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      serviceNameList.remove(index);
+                                      deleteAllTaskDocs(serviceNameList[index]);
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.deepPurple,
+                                  ),
+                                  splashColor: Colors.deepPurple,
                                 ),
                               ),
-                            );
-                          }));
-                    }
-                    return const Text('Loading');
-                  }),
-            ),
-
-
+                            ),
+                          );
+                        }));
+                  }
+                  return const Text('Loading');
+                }),
           ),
-          bottomNavigationBar: Container(
+        ),
+        bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -224,15 +231,39 @@ class _BookingPageState extends State<BookingPage> {
                 onTabChange: (index) {
                   setState(() {
                     if (index == 0) {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const LandingPage()));
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LandingPage()));
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation<double> animation1,
+                              Animation<double> animation2) {
+                            return const LandingPage();
+                          },
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
                     } else if (index == 2) {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const ProfilePage()));
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePage()));
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation<double> animation1,
+                              Animation<double> animation2) {
+                            return const ProfilePage();
+                          },
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
                     }
                   });
                 },
@@ -240,8 +271,7 @@ class _BookingPageState extends State<BookingPage> {
             ),
           ),
         ),
-          
-          ),
+      ),
     );
   }
 }

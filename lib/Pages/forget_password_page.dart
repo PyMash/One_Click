@@ -28,7 +28,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
+      backgroundColor: const Color.fromARGB(255, 194, 188, 240),
       body: Center(
         child: Form(
           key: formKey,

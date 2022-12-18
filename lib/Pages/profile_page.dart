@@ -328,14 +328,30 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     if (index == 0) {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LandingPage()));
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation<double> animation1,
+                              Animation<double> animation2) {
+                            return const LandingPage();
+                          },
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
                     } else if (index == 1) {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BookingPage()));
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation<double> animation1,
+                              Animation<double> animation2) {
+                            return const BookingPage();
+                          },
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
                     }
                   });
                 },
