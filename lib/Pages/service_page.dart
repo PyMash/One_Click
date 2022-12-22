@@ -58,11 +58,11 @@ class _HomePageState extends State<HomePage> {
                               service: service,
                             )));
               },
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_forward_ios,
                 size: 20,
               ),
-              backgroundColor: Color.fromARGB(255, 82, 25, 180),
+              backgroundColor: const Color.fromARGB(255, 82, 25, 180),
             )
           : null,
       body: Center(
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Which Service',
                         style: TextStyle(
                           fontSize: 30,
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'do you required ?',
                         style: TextStyle(
                           fontSize: 30,
@@ -104,14 +104,14 @@ class _HomePageState extends State<HomePage> {
                   child: GridView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      padding: EdgeInsets.all(25.0),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      padding: const EdgeInsets.all(25.0),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1.0,
                         crossAxisSpacing: 20.0,
                         mainAxisSpacing: 20.0,
                       ),
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: services.length,
                       itemBuilder: (BuildContext context, int index) {
                         return serviceContainer(services[index].imageURL,
@@ -143,8 +143,8 @@ class _HomePageState extends State<HomePage> {
               : Colors.grey.shade100,
           border: Border.all(
             color: selectedService == index
-                ? Color.fromARGB(255, 82, 25, 180)
-                : Color.fromARGB(255, 82, 25, 180).withOpacity(0),
+                ? const Color.fromARGB(255, 82, 25, 180)
+                : const Color.fromARGB(255, 82, 25, 180).withOpacity(0),
             width: 2.0,
           ),
           borderRadius: BorderRadius.circular(20.0),
@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                 image,
                 height: 80,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(

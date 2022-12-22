@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:one_click/Pages/booking_page.dart';
 import 'package:line_icons/line_icons.dart';
-
+import 'package:dotted_line/dotted_line.dart';
 import '../main.dart';
 import 'landing_page.dart';
 
@@ -149,6 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   builder: (context) => const BookingPage()));
                         },
                         child: Container(
+                          color: Colors.white,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,89 +164,164 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Divider(
-                          height: 5,
+                          padding: const EdgeInsets.only(top: 12, bottom: 12),
+                          child: DottedLine(
+                            dashColor: Colors.deepPurple,
+                          )),
+                      GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Coming Soon!',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('My Rating'),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('My Rating'),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                          )
-                        ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Divider(
-                          height: 5,
+                          padding: const EdgeInsets.only(top: 12, bottom: 12),
+                          child: DottedLine(
+                            dashColor: Colors.deepPurple,
+                          )),
+                      GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Coming Soon!',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('About One Click'),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('About One Click'),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                          )
-                        ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Divider(
-                          height: 5,
+                          padding: const EdgeInsets.only(top: 12, bottom: 12),
+                          child: DottedLine(
+                            dashColor: Colors.deepPurple,
+                          )),
+                      GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Coming Soon!',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Share With Friends'),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Share With Friends'),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                          )
-                        ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Divider(
-                          height: 5,
+                          padding: const EdgeInsets.only(top: 12, bottom: 12),
+                          child: DottedLine(
+                            dashColor: Colors.deepPurple,
+                          )),
+                      GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Coming Soon!',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Rate Our Application'),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Rate Our Application'),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                          )
-                        ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Divider(
-                          height: 5,
+                          padding: const EdgeInsets.only(top: 12, bottom: 12),
+                          child: DottedLine(
+                            dashColor: Colors.deepPurple,
+                          )),
+                      GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'Coming Soon!',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                        },
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Help Center'),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Help Center'),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                          )
-                        ],
                       ),
                     ]),
                   ),

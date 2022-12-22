@@ -18,7 +18,7 @@ class _Address_pageState extends State<AddressPage> {
   late double Charges = widget.Charges;
   late String service = widget.services;
 
-  int _value = 1;
+  int _value = 1; 
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
   bool loading = false;

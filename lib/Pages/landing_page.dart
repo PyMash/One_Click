@@ -30,9 +30,14 @@ class _LandingPageState extends State<LandingPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const HomePage()));
         },
-        child: const Icon(
-          Icons.arrow_forward_ios,
-          size: 20,
+        child: GestureDetector(
+          onTap: () {
+            
+          },
+          child: const Icon(
+            Icons.arrow_forward_ios,
+            size: 20,
+          ),
         ),
         backgroundColor: const Color.fromARGB(255, 82, 25, 180),
       ),
@@ -72,7 +77,17 @@ class _LandingPageState extends State<LandingPage> {
                       Icons.notifications,
                       color: Colors.deepPurple,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              backgroundColor: Color.fromARGB(
+                                                  255, 82, 25, 180),
+                                              content: Text(
+                                                'No new notification',textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )));
+                    },
                   ),
                 ],
               ),
