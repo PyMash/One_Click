@@ -168,10 +168,55 @@ class _BookingPageState extends State<BookingPage> {
                                     )),
                                 trailing: IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      serviceNameList.remove(index);
-                                      deleteAllTaskDocs(serviceNameList[index]);
-                                    });
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(
+                                              'Are you sure you want to cancel ?',
+                                              style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 82, 25, 180),
+                                              ),
+                                            ),
+                                            actionsAlignment:
+                                                MainAxisAlignment.center,
+                                            // buttonPadding: EdgeInsets.only(right: 10),
+                                            actionsPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 10),
+                                            // contentPadding: EdgeInsets.only(right: 20),
+                                            // insetPadding: EdgeInsets.only(right: 80) ,
+                                            actions: [
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    serviceNameList
+                                                        .remove(index);
+                                                    deleteAllTaskDocs(
+                                                        serviceNameList[index]);
+                                                  });
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('Yes'),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.deepPurple,
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('No'),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.deepPurple,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        });
                                   },
                                   icon: const Icon(
                                     Icons.delete,

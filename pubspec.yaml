@@ -44,6 +44,7 @@ dependencies:
   tuple: ^2.0.1
   cloud_firestore: ^4.2.0
   flutter_offline: ^2.1.0
+  dotted_line: ^3.1.0
 
 dev_dependencies:
   flutter_test:
