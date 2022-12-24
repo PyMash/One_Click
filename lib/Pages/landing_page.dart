@@ -121,7 +121,7 @@ class _LandingPageState extends State<LandingPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 3),
                         child: Text(
-                          'Here You can find all \nprofessional you need !',
+                          'Here you can find all \nthe professionals you need !',
                           style: GoogleFonts.openSans(
                             fontSize: 18,
                             fontStyle: FontStyle.italic,
