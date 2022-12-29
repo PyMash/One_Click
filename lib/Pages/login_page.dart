@@ -205,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
-                                    Color.fromARGB(255, 82, 25, 180),
+                                    Color.fromARGB(255, 58, 17, 170),
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0)),
