@@ -18,6 +18,8 @@ class _BookingPageState extends State<BookingPage> {
   late int totalService = 0;
   late var serviceNameList = [];
   late var placePincodeList = [];
+  late var orderStatus = [];
+  late var dateTime = [];
   late var serviceAvailable = [
     'Tutor',
     'Electrician',
@@ -62,9 +64,13 @@ class _BookingPageState extends State<BookingPage> {
 
           // print(data!['Time']);
           String placePincode = (data!['Place and Pincode']).toString();
+          String oStatus = (data['Order Status']).toString();
+          String dt = (data['Time & Date']).toString();
           // print('Document data: ${documentSnapshot.data()}');
           serviceNameList.add(srlist[i].toString());
           placePincodeList.add(placePincode);
+          orderStatus.add(oStatus);
+          dateTime.add(dt);
           totalService = totalService + 1;
         } else {
           print('Document does not exist on the database');
@@ -146,83 +152,133 @@ class _BookingPageState extends State<BookingPage> {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
+                              height: 140,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: Colors.white,
                               ),
-                              child: ListTile(
-                                title: Text(
-                                  serviceNameList[index].toString(),
-                                  style: const TextStyle(
-                                    color: Colors.deepPurple,
-                                    letterSpacing: 1.3,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                subtitle: Text(placePincodeList[index],
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: Text(
+                                    serviceNameList[index].toString(),
                                     style: const TextStyle(
-                                      color: Colors.black,
-                                      letterSpacing: 1.1,
-                                      fontWeight: FontWeight.w500,
-                                    )),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            content: Text(
-                                              'Are you sure you want to cancel ?',
-                                              style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 82, 25, 180),
-                                              ),
-                                            ),
-                                            actionsAlignment:
-                                                MainAxisAlignment.center,
-                                            // buttonPadding: EdgeInsets.only(right: 10),
-                                            actionsPadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 10),
-                                            // contentPadding: EdgeInsets.only(right: 20),
-                                            // insetPadding: EdgeInsets.only(right: 80) ,
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    serviceNameList
-                                                        .remove(index);
-                                                    deleteAllTaskDocs(
-                                                        serviceNameList[index]);
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text('Yes'),
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.deepPurple,
-                                                ),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text('No'),
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.deepPurple,
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        });
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.deepPurple,
+                                      color: Colors.deepPurple,
+                                      letterSpacing: 1.3,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  splashColor: Colors.deepPurple,
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(LineIcons.mapMarker),
+                                            Text(placePincodeList[index],
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  letterSpacing: 1.1,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ],
+                                        ),
+                                        SizedBox(height: 5,),
+                                        Row(
+                                          children: [
+                                            Icon(LineIcons.clock),
+                                            Text(dateTime[index],
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  letterSpacing: 1.1,
+                                                  fontWeight: FontWeight.w500,
+                                                )),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                            'Current Status : ' +
+                                                orderStatus[index],
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              letterSpacing: 1.1,
+                                              fontWeight: FontWeight.w500,
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  trailing: IconButton(
+                                    
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              content: const Text(
+                                                'Are you sure you want to cancel ?',
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 82, 25, 180),
+                                                ),
+                                              ),
+                                              actionsAlignment:
+                                                  MainAxisAlignment.center,
+                                              // buttonPadding: EdgeInsets.only(right: 10),
+                                              actionsPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10),
+                                              // contentPadding: EdgeInsets.only(right: 20),
+                                              // insetPadding: EdgeInsets.only(right: 80) ,
+                                              actions: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      serviceNameList
+                                                          .remove(index);
+                                                      deleteAllTaskDocs(
+                                                          serviceNameList[
+                                                              index]);
+                                                    });
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('Yes'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.deepPurple,
+                                                  ),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('No'),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.deepPurple,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    },
+                                    icon: const Icon(
+                                      
+                                      
+                                      Icons.delete,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    splashColor: Colors.deepPurple,
+                                  ),
                                 ),
                               ),
                             ),

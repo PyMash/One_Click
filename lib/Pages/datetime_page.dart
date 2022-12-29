@@ -234,6 +234,8 @@ class _DateTimePageState extends State<DateTimePage> {
                             'Address Type': widget.addresstype,
                             'Time & Date': dateTime.trim(),
                             'Place and Pincode': pp,
+                            'Order Status' : 'Yet To Assign',
+                            'Assign To' : 'none'
                             
                           });
                           // ignore: use_build_context_synchronously
