@@ -5,7 +5,7 @@ Semester Project
 *1. Goto Code and Download Zip </Br>*
 *2. Extract the Folder </Br>*
 *3. Rename the Folder "One_Click-main" as "one_click" <Br>*
-*4. Open the folder in VS Code and </Br> Change the Directory to the root of the flutter project </Br>*
+*4. Open the folder in VS Code and Change the Directory to the root of the flutter project </Br>*
 *5. Run 'Flutter Clean' and 'Flutter pub get' in the Terminal </Br>*
 *6. Ctrl+Shift+p and type 'Flutter: Select Device' </Br> Select 'Enable Android for this project' and </Br> 'Yes' to the dialog box </Br>*
 *7. Now make a new Android Firebase Project </Br> Android package name: "com.example.one_click" > Register the App </Br> Download "google-services.json" </Br> Copy and Paste this file inside App folder (path: android/app) </Br>*
