@@ -1,6 +1,5 @@
-# One_Click <br> AN ON-DEMAND SERVICE SYSTEM USING FLUTTER & FIREBASE
-Semester Project
-
+# One_Click 
+An On-Demand Service System Using Flutter & Firebase
 ## How to Download and Run the File.
 *1. Goto Code and Download Zip <Br>*
 *2. Extract the Folder </Br>*
