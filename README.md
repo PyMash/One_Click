@@ -1,8 +1,8 @@
-# One_Click | AN ON-DEMAND SERVICE SYSTEM USING FLUTTER & FIREBASE
+# One_Click <br> AN ON-DEMAND SERVICE SYSTEM USING FLUTTER & FIREBASE
 Semester Project
 
 ## How to Download and Run the File.
-*1. Goto Code and Download Zip </Br>*
+*1. Goto Code and Download Zip <Br>*
 *2. Extract the Folder </Br>*
 *3. Rename the Folder "One_Click-main" as "one_click" <Br>*
 *4. Open the folder in VS Code and Change the Directory to the root of the flutter project </Br>*
